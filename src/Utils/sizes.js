@@ -6,10 +6,10 @@ export const fSize={
   xl: 24,
   xxl: 32,
   xxxl: 64,
-  xxxxl: 128
+  xxxxl: 128,
 };
 
-export const size={
+export const spacing={
   ssm: 3,
   sm: 5,
   md: 8,
@@ -17,5 +17,5 @@ export const size={
   xl: 24,
   xxl: 32,
   xxxl: 64,
-  xxxxl: 128
+  xxxxl: 128,
 };

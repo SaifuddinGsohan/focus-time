@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
-import { fSize, size } from '../utils/sizes';
-import { color } from '../utils/colors';
+import { fSize, spacing } from '../Utils/sizes';
+import { color } from '../Utils/colors';
 
 const minutesToMillis = (min) => min * 1000 * 60;
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
@@ -11,11 +11,15 @@ export const Countdown = ({ minutes = 0.1, isPaused, onProgress, onEnd }) => {
 
   const [millis, setMillis] = useState(null);
 
+  const reset = () => {
+    setMillis(minutesToMillis(minutes));
+  }
+
   const countDown = () => {
     setMillis((time) => {
       if (time === 0) {
         clearInterval(interval.current);
-        onEnd();
+        onEnd(reset);
         return time;
       }
       const timeLeft = time - 1000;
@@ -55,8 +59,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: fSize.xxxl,
     fontWeight: 'bold',
-    color: colors.white,
-    padding: size.lg,
+    color: color.white,
+    padding: spacing.lg,
     backgroundColor: 'rgba(94, 132, 226, 0.3)',
   },
 });

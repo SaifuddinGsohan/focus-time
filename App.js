@@ -6,21 +6,30 @@ import Constants from 'expo-constants';
 import {Focus} from "./src/features/Focus";
 import {Timer} from './src/features/Timer' 
 import {color} from './src/Utils/colors'
+import { History } from './src/features/History';
 // or any pure javascript modules available in npm
 
 export default function App() {
   const [focusSub, setFocusSub] = useState(null);
+  const [history, setHistory] = useState([]);
 
   return (
     <View style={styles.container}>
       {focusSub ? (
         <Timer
           currentSub={focusSub}
-          onTimeEnd={()=>{}}
-          clearSub={()=>{}}
+          onTimeEnd={(Sub)=>{
+            setHistory([...history, Sub]);
+            console.log('onTimeEnd');
+            setFocusSub(null);
+          }}
+          clearSub={()=>{ setFocusSub(null)}}
         />
       ) : (
-        <Focus addSub= {setFocusSub}/>
+        <>
+          <Focus addSub= {setFocusSub}/>
+          <History history={history}/>
+        </>
       )}
     </View>
   );
